@@ -24,7 +24,9 @@ func add(c *gin.Context) {
 }
 
 func complete(c *gin.Context) {
-
+	c.JSON(http.StatusOK, gin.H{
+		"status": "success",
+	})
 }
 
 func tasks(c *gin.Context) {
