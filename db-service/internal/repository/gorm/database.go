@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/BraunKc/todo/db-service/config"
+	"github.com/BraunKc/todo/db-service/internal/repository/models"
 	"github.com/joho/godotenv"
 	"go.uber.org/zap"
 	"gorm.io/driver/postgres"
@@ -26,6 +27,8 @@ func InitDatabase() *gorm.DB {
 	if err != nil {
 		config.Logger.Fatal("DB open error", zap.Error(err))
 	}
+
+	db.AutoMigrate(&models.Task{})
 
 	config.Logger.Debug("database inited:", zap.Any("DB", db))
 	return db
