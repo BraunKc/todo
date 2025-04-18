@@ -14,7 +14,7 @@ import (
 
 func InitDatabase() *gorm.DB {
 	if err := godotenv.Load(); err != nil {
-		config.Logger.Fatal("no .env file found:", zap.Error(err))
+		config.Logger.Fatal("no .env file found", zap.Error(err))
 	}
 
 	host, user, password, dbname, port := os.Getenv("DB_HOST"), os.Getenv("DB_USER"),
@@ -30,6 +30,6 @@ func InitDatabase() *gorm.DB {
 
 	db.AutoMigrate(&models.Task{})
 
-	config.Logger.Debug("database inited:", zap.Any("DB", db))
+	config.Logger.Debug("database inited", zap.Any("DB", db))
 	return db
 }
