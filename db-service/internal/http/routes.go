@@ -9,11 +9,11 @@ func InitRoutes() {
 	router := gin.Default()
 
 	router.POST("/create-task", createTask)
-	router.PUT("/set-status-complete/:id", setStatusComplete)
+	router.GET("/set-status-complete/:id", setStatusComplete)
 	router.GET("/get-all-tasks", getAllTasks)
 	router.GET("/get-task/:id", getTask)
 	router.DELETE("/delete-task/:id", deleteTask)
-	router.DELETE("/clean-complete-tasks", cleanCompleteTasks)
+	router.DELETE("/clean-completed-tasks", cleanCompleteTasks)
 
 	config.Logger.Info("routes inited")
 
