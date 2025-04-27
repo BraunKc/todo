@@ -1,2 +1,2 @@
 db-service:
-  endpoint: "http://localhost:8282"
+  endpoint: "http://db-service:8282"

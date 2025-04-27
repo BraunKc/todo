@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/BraunKc/todo/db-service/config"
+	"github.com/braunkc/todo/db-service/config"
 	"github.com/gin-gonic/gin"
 )
 

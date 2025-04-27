@@ -3,9 +3,9 @@ package app
 import (
 	"fmt"
 
-	"github.com/BraunKc/todo/api-service/config"
-	api "github.com/BraunKc/todo/api-service/internal/http"
-	"github.com/BraunKc/todo/api-service/internal/utils"
+	"github.com/braunkc/todo/api-service/config"
+	api "github.com/braunkc/todo/api-service/internal/http"
+	"github.com/braunkc/todo/api-service/internal/utils"
 )
 
 func Run() {

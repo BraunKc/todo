@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/BraunKc/todo/db-service/config"
-	"github.com/BraunKc/todo/db-service/internal/repository/models"
+	"github.com/braunkc/todo/db-service/config"
+	"github.com/braunkc/todo/db-service/internal/repository/models"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )

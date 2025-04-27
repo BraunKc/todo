@@ -4,17 +4,13 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/BraunKc/todo/db-service/config"
-	"github.com/BraunKc/todo/db-service/internal/repository/models"
+	"github.com/braunkc/todo/db-service/config"
+	"github.com/braunkc/todo/db-service/internal/repository/models"
 	"github.com/go-redis/redis"
-	"github.com/joho/godotenv"
 	"go.uber.org/zap"
 )
 
 func InitRedis() *redis.Client {
-	if err := godotenv.Load(); err != nil {
-		config.Logger.Fatal("no .env file found", zap.Error(err))
-	}
 	addr := os.Getenv("REDIS_ADDR")
 
 	client := redis.NewClient(&redis.Options{

@@ -1,0 +1,47 @@
+services:
+  api-service:
+    image: api-service:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - network
+  db-service:
+    build: /
+    depends_on:
+      - postgres
+      - redis
+    restart: always
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=bk
+      - DB_PASSWORD=1111
+      - DB_NAME=todo-db
+      - REDIS_ADDR=redis:6379
+    ports:
+      - "8282:8282"
+    networks:
+      - network
+
+  postgres:
+    image: postgres:14
+    restart: always
+    environment:
+      - POSTGRES_USER=bk
+      - POSTGRES_PASSWORD=1111
+      - POSTGRES_DB=todo-db
+    ports:
+      - "5432:5432"
+    networks:
+      - network
+      
+  redis:
+    image: redis:7
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - network
+networks:
+  network:
+    driver: bridge
