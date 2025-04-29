@@ -8,16 +8,18 @@ services:
   db-service:
     build: /
     depends_on:
-      - postgres
-      - redis
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     restart: always
     environment:
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_USER=bk
-      - DB_PASSWORD=1111
-      - DB_NAME=todo-db
-      - REDIS_ADDR=redis:6379
+      - DB_HOST: ${DB_HOST}
+      - DB_PORT: ${DB_PORT}
+      - DB_USER: ${DB_USER}
+      - DB_PASSWORD: ${DB_PASSWORD}
+      - DB_NAME: ${DB_NAME}
+      - REDIS_ADDR: ${REDIS_ADDR}
     ports:
       - "8282:8282"
     networks:
@@ -27,9 +29,14 @@ services:
     image: postgres:14
     restart: always
     environment:
-      - POSTGRES_USER=bk
-      - POSTGRES_PASSWORD=1111
-      - POSTGRES_DB=todo-db
+      - POSTGRES_USER: ${DB_USER}
+      - POSTGRES_PASSWORD: ${DB_PASSWORD}
+      - POSTGRES_DB: ${DB_NAME}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
     ports:
       - "5432:5432"
     networks:
@@ -38,6 +45,11 @@ services:
   redis:
     image: redis:7
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
     ports:
       - "6379:6379"
     networks:
